@@ -1,11 +1,11 @@
 <template>
     <article>
-        <h2>Order confirmation</h2>
+        Thank you for your order!
     </article>
 </template>
 
 <script>
 export default {
-    name: "CheckoutStepConfirmation"
+    name: "CheckoutStepConfirmation",
 }
 </script>

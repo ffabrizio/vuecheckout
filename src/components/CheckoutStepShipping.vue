@@ -1,12 +1,11 @@
 <template>
     <article>
-        <h2>Shipping information</h2>
         <vue-form-generator 
             :schema="schema" 
             :model="model" 
             :options="formOptions">
         </vue-form-generator>
-        <button v-if="model" v-on:click="continueCheckout(model)">Continue</button>
+        <button v-if="model" v-on:click="continueCheckout">Continue</button>
     </article>
 </template>
 
@@ -40,10 +39,9 @@ export default {
         }
     },
     methods: {
-        continueCheckout(model) {
-            console.log("Changing", model)
+        continueCheckout() {
             //if (VueFormGenerator.isValid()) {
-                this.$store.dispatch("setShippingInfo", model)
+                this.$store.dispatch("setShippingInfo", this.model)
             //}
         }
     }

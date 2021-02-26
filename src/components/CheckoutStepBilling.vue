@@ -1,11 +1,18 @@
 <template>
     <article>
-        <h2>Billing information</h2>
+        <button v-on:click="continueCheckout">Finish</button>
     </article>
 </template>
 
 <script>
 export default {
-    name: "CheckoutStepBilling"
+    name: "CheckoutStepBilling",
+    methods: {
+        continueCheckout(model) {
+            //if (VueFormGenerator.isValid()) {
+                this.$store.dispatch("setBillingInfo", model)
+            //}
+        }
+    }
 }
 </script>

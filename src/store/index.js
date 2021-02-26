@@ -31,7 +31,7 @@ export const store = new Vuex.Store({
             steps: {
                 intro: {
                     isCurrentStep: true,
-                    done: false,
+                    isComplete: false,
                     info: {
                         title: "",
                         firstName: "",
@@ -43,7 +43,7 @@ export const store = new Vuex.Store({
                 },
                 shipping: {
                     isCurrentStep: false,
-                    done: false,
+                    isComplete: false,
                     address: {
                         line1: "",
                         line2: "",
@@ -52,15 +52,14 @@ export const store = new Vuex.Store({
                         region: "",
                         country: "United Kingdom"
                     },
+                    shippingMethod: "",
                     shippingMethods: [
                         {
-                            selected: false,
                             id: "standard",
                             name: "Standard delivery",
                             description: "Usually ships within 2 days"
                         },
                         {
-                            selected: false,
                             id: "express",
                             name: "Express delivery",
                             description: "Usually ships within 24 hours"
@@ -69,7 +68,7 @@ export const store = new Vuex.Store({
                 },
                 billing: {
                     isCurrentStep: false,
-                    done: false,
+                    isComplete: false,
                     address: {
                         line1: "",
                         line2: "",
@@ -86,7 +85,7 @@ export const store = new Vuex.Store({
                 },
                 confirmation: {
                     isCurrentStep: false,
-                    done: false,
+                    isComplete: false,
                     info: {
                         id: "",
                         message: ""
@@ -97,22 +96,31 @@ export const store = new Vuex.Store({
     },
     mutations: {
         setPersonalInfo(state, info) {
-            state.checkout.steps.intro.done = true
+            state.checkout.steps.intro.isComplete = true
             state.checkout.steps.intro.info = info
             state.checkout.steps.intro.isCurrentStep = false;
+
             state.checkout.steps.shipping.isCurrentStep = true;
 
         },
         setShippingInfo(state, info) {
-            state.checkout.steps.shipping.done = true
+            state.checkout.steps.shipping.isComplete = true
             state.checkout.steps.shipping.address = info.address
             state.checkout.steps.shipping.shippingMethod = info.shippingMethod
             state.checkout.steps.shipping.isCurrentStep = false;
+
             state.checkout.steps.billing.isCurrentStep = true;
+        },
+        setBillingInfo(state) {
+            state.checkout.steps.billing.isComplete = true
+            state.checkout.steps.billing.isCurrentStep = false;
+
+            state.checkout.steps.confirmation.isCurrentStep = true;
         }
     },
     actions: {
-        setPersonalInfo({ commit }) { commit('setPersonalInfo') },
-        setShippingInfo({ commit }) { commit('setShippingInfo') }
+        setPersonalInfo({ commit }, payload) { commit("setPersonalInfo", payload) },
+        setShippingInfo({ commit }, payload) { commit("setShippingInfo", payload) },
+        setBillingInfo({ commit }, payload) { commit("setBillingInfo", payload) }
     }
 })

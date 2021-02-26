@@ -6,7 +6,7 @@
             :model="model" 
             :options="formOptions">
         </vue-form-generator>
-        <button v-on:click="continueCheckout(model)">Continue</button>
+        <button v-on:click="continueCheckout">Continue</button>
     </article>
 </template>
 
@@ -30,9 +30,9 @@ export default {
         }
     },
     methods: {
-        continueCheckout(model) {
+        continueCheckout() {
             //if (VueFormGenerator.isValid()) {
-                this.$store.dispatch("setPersonalInfo", model)
+                this.$store.dispatch("setPersonalInfo", this.model)
             //}
         }
     }
