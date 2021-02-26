@@ -21,7 +21,7 @@ export default {
     },
     data() {
         return {
-            model: store.state.checkout.steps.info,
+            model: store.state.checkout.steps.intro.info,
             schema: info,
             formOptions: {
                 validateAfterLoad: true,
@@ -34,7 +34,7 @@ export default {
         continueCheckout: (model) => {
             store.commit("setPersonalInfo", model)
             
-            console.log(store.state.checkout)
+            console.log(store.state.checkout.steps)
         }
     }
 }

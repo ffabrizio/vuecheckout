@@ -6,6 +6,6 @@
 
 <script>
 export default {
-    name: "CheckoutStepConformation"
+    name: "CheckoutStepConfirmation"
 }
 </script>

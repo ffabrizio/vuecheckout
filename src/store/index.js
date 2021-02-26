@@ -5,7 +5,6 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        count: 0,
         cart: {
             lineItems: [
                 // { 
@@ -30,15 +29,21 @@ export const store = new Vuex.Store({
         },
         checkout: {
             steps: {
-                info: {
-                    title: "",
-                    firstName: "",
-                    lastName: "",
-                    emailAddress: "",
-                    poNumber: "",
-                    notes: ""
+                intro: {
+                    current: true,
+                    done: false,
+                    info: {
+                        title: "",
+                        firstName: "",
+                        lastName: "",
+                        emailAddress: "",
+                        poNumber: "",
+                        notes: ""
+                    }
                 },
                 shipping: {
+                    current: false,
+                    done: false,
                     address: {
                         line1: "",
                         line2: "",
@@ -63,6 +68,8 @@ export const store = new Vuex.Store({
                     ]
                 },
                 billing: {
+                    current: false,
+                    done: false,
                     address: {
                         line1: "",
                         line2: "",
@@ -78,17 +85,23 @@ export const store = new Vuex.Store({
                     }
                 },
                 confirmation: {
-                    id: "",
-                    message: "",
+                    current: false,
+                    done: false,
+                    info: {
+                        id: "",
+                        message: ""
+                    }
                 }
             }
         }
     },
     mutations: {
         setPersonalInfo(state, info) {
-            state.checkout.steps.info = info
+            state.checkout.steps.intro.done = true
+            state.checkout.steps.intro.info = info
         },
         setShippingInfo(state, info) {
+            state.checkout.steps.shipping.done = true
             state.checkout.steps.shipping.address = info.address
             state.checkout.steps.shipping.shippingMethod = info.shippingMethod
         }

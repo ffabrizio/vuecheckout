@@ -47,7 +47,7 @@ export default {
                 shippingMethod: model.shippingMethod 
             })
 
-            console.log(store.state.checkout)
+            console.log(store.state.checkout.steps)
         }
     }
 }
