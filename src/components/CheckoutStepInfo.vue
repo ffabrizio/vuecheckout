@@ -12,7 +12,6 @@
 
 <script>
 import VueFormGenerator from "vue-form-generator"
-import {store} from "../store/index"
 import {info} from "../schemas/info"
 export default {
     name: "CheckoutStepInfo",
@@ -21,7 +20,7 @@ export default {
     },
     data() {
         return {
-            model: store.state.checkout.steps.intro.info,
+            model: this.$store.state.checkout.steps.intro.info,
             schema: info,
             formOptions: {
                 validateAfterLoad: true,
@@ -31,10 +30,10 @@ export default {
         }
     },
     methods: {
-        continueCheckout: (model) => {
-            store.commit("setPersonalInfo", model)
-            
-            console.log(store.state.checkout.steps)
+        continueCheckout(model) {
+            //if (VueFormGenerator.isValid()) {
+                this.$store.dispatch("setPersonalInfo", model)
+            //}
         }
     }
 }

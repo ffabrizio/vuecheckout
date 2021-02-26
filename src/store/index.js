@@ -30,7 +30,7 @@ export const store = new Vuex.Store({
         checkout: {
             steps: {
                 intro: {
-                    current: true,
+                    isCurrentStep: true,
                     done: false,
                     info: {
                         title: "",
@@ -42,7 +42,7 @@ export const store = new Vuex.Store({
                     }
                 },
                 shipping: {
-                    current: false,
+                    isCurrentStep: false,
                     done: false,
                     address: {
                         line1: "",
@@ -68,7 +68,7 @@ export const store = new Vuex.Store({
                     ]
                 },
                 billing: {
-                    current: false,
+                    isCurrentStep: false,
                     done: false,
                     address: {
                         line1: "",
@@ -85,7 +85,7 @@ export const store = new Vuex.Store({
                     }
                 },
                 confirmation: {
-                    current: false,
+                    isCurrentStep: false,
                     done: false,
                     info: {
                         id: "",
@@ -99,11 +99,20 @@ export const store = new Vuex.Store({
         setPersonalInfo(state, info) {
             state.checkout.steps.intro.done = true
             state.checkout.steps.intro.info = info
+            state.checkout.steps.intro.isCurrentStep = false;
+            state.checkout.steps.shipping.isCurrentStep = true;
+
         },
         setShippingInfo(state, info) {
             state.checkout.steps.shipping.done = true
             state.checkout.steps.shipping.address = info.address
             state.checkout.steps.shipping.shippingMethod = info.shippingMethod
+            state.checkout.steps.shipping.isCurrentStep = false;
+            state.checkout.steps.billing.isCurrentStep = true;
         }
+    },
+    actions: {
+        setPersonalInfo({ commit }) { commit('setPersonalInfo') },
+        setShippingInfo({ commit }) { commit('setShippingInfo') }
     }
 })

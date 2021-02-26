@@ -1,9 +1,9 @@
 <template>
     <div>
-        <checkout-step-info v-if="showInfoStep" />
-        <checkout-step-shipping v-if="showShippingStep" />
-        <checkout-step-billing v-if="showBillingStep" />
-        <checkout-step-confirmation v-if="showConfirmationStep" />
+        <checkout-step-info />
+        <checkout-step-shipping />
+        <checkout-step-billing />
+        <checkout-step-confirmation />
     </div>
 </template>
 <script>
@@ -11,7 +11,6 @@ import CheckoutStepInfo from "./CheckoutStepInfo"
 import CheckoutStepShipping from "./CheckoutStepShipping"
 import CheckoutStepBilling from "./CheckoutStepBilling"
 import CheckoutStepConfirmation from "./CheckoutStepConfirmation"
-import {store} from "../store/index"
 
 export default {
     name: "Checkout",
@@ -23,20 +22,20 @@ export default {
     },
     computed:{
         showInfoStep() {
-            return !store.state.checkout.steps.intro.done &&
-                store.state.checkout.intro.current
+            return !this.$store.state.checkout.steps.intro.done &&
+                this.$store.state.checkout.intro.isCurrentStep
         },
         showShippingStep() {
-            return !store.state.checkout.steps.shipping.done &&
-                store.state.checkout.shipping.current
+            return !this.$store.state.checkout.steps.shipping.done &&
+                this.$store.state.checkout.shipping.isCurrentStep
         },
         showBillingStep() {
-            return !store.state.checkout.steps.billing.done &&
-                store.state.checkout.billing.current
+            return !this.$store.state.checkout.steps.billing.done &&
+                this.$store.state.checkout.billing.isCurrentStep
         },
         showConfirmationStep() {
-            return !store.state.checkout.steps.confirmation.done &&
-                store.state.checkout.confirmation.current
+            return !this.$store.state.checkout.steps.confirmation.done &&
+                this.$store.state.checkout.confirmation.isCurrentStep
         }
     }
 }

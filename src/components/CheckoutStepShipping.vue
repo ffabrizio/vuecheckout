@@ -12,7 +12,6 @@
 
 <script>
 import VueFormGenerator from "vue-form-generator"
-import {store} from "../store/index"
 import {address} from "../schemas/address"
 import {shippingMethod} from "../schemas/shippingMethod"
 
@@ -22,11 +21,11 @@ export default {
         "vue-form-generator": VueFormGenerator.component
     },
     data() {
-        shippingMethod.fields[0].values = store.state.checkout.steps.shipping.shippingMethods
+        shippingMethod.fields[0].values = this.$store.state.checkout.steps.shipping.shippingMethods
         return {
             model: { 
-                address: store.state.checkout.steps.shipping.address,
-                shippingMethod: store.state.checkout.steps.shipping.shippingMethods
+                address: this.$store.state.checkout.steps.shipping.address,
+                shippingMethod: this.$store.state.checkout.steps.shipping.shippingMethods
             },
             schema: { 
                 groups: [ 
@@ -41,13 +40,11 @@ export default {
         }
     },
     methods: {
-        continueCheckout: (model) => {
-            store.commit("setShippingInfo", { 
-                address: model.address, 
-                shippingMethod: model.shippingMethod 
-            })
-
-            console.log(store.state.checkout.steps)
+        continueCheckout(model) {
+            console.log("Changing", model)
+            //if (VueFormGenerator.isValid()) {
+                this.$store.dispatch("setShippingInfo", model)
+            //}
         }
     }
 }
