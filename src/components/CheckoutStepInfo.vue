@@ -1,6 +1,5 @@
 <template>
     <article>
-        <h2>Personal information</h2>
         <vue-form-generator 
             :schema="schema" 
             :model="model" 

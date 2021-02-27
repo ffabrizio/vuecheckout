@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import "vue-form-generator/dist/vfg.css"
+
 import Vue from "vue"
 import VueFormGenerator from "vue-form-generator"
 import Checkout from "./components/Checkout.vue"
