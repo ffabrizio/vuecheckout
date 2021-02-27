@@ -26,16 +26,16 @@ export default {
     },
     computed:{
         showInfoStep() {
-            return this.$store.state.checkout.steps.intro.isCurrentStep
+            return this.$store.state.checkout.intro.isCurrentStep
         },
         showShippingStep() {
-            return this.$store.state.checkout.steps.shipping.isCurrentStep
+            return this.$store.state.checkout.shipping.isCurrentStep
         },
         showBillingStep() {
-            return this.$store.state.checkout.steps.billing.isCurrentStep
+            return this.$store.state.checkout.billing.isCurrentStep
         },
         showConfirmationStep() {
-            return this.$store.state.checkout.steps.confirmation.isCurrentStep
+            return this.$store.state.checkout.confirmation.isCurrentStep
         }
     }
 }

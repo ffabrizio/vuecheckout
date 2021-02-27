@@ -1,6 +1,8 @@
 <template>
     <article>
-        <button v-on:click="continueCheckout">Finish</button>
+         <form action="" @submit.prevent="continueCheckout">
+            <button type="submit">Finish</button>
+         </form>
     </article>
 </template>
 
@@ -9,9 +11,7 @@ export default {
     name: "CheckoutStepBilling",
     methods: {
         continueCheckout(model) {
-            //if (VueFormGenerator.isValid()) {
-                this.$store.dispatch("setBillingInfo", model)
-            //}
+            this.$store.dispatch("setBillingInfo", model)
         }
     }
 }

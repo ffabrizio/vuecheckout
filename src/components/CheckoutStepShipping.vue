@@ -1,11 +1,13 @@
 <template>
     <article>
-        <vue-form-generator 
-            :schema="schema" 
-            :model="model" 
-            :options="formOptions">
-        </vue-form-generator>
-        <button v-if="model" v-on:click="continueCheckout">Continue</button>
+        <form action="" @submit.prevent="continueCheckout">
+            <vue-form-generator 
+                :schema="schema" 
+                :model="model" 
+                :options="formOptions">
+            </vue-form-generator>
+            <button type="submit">Continue</button>
+        </form>
     </article>
 </template>
 
@@ -20,11 +22,11 @@ export default {
         "vue-form-generator": VueFormGenerator.component
     },
     data() {
-        shippingMethod.fields[0].values = this.$store.state.checkout.steps.shipping.shippingMethods
+        shippingMethod.fields[0].values = this.$store.state.checkout.shipping.shippingMethods
         return {
             model: { 
-                address: this.$store.state.checkout.steps.shipping.address,
-                shippingMethod: this.$store.state.checkout.steps.shipping.shippingMethods
+                address: this.$store.state.checkout.shipping.address,
+                shippingMethod: this.$store.state.checkout.shipping.shippingMethods
             },
             schema: { 
                 groups: [ 
@@ -40,9 +42,7 @@ export default {
     },
     methods: {
         continueCheckout() {
-            //if (VueFormGenerator.isValid()) {
-                this.$store.dispatch("setShippingInfo", this.model)
-            //}
+            this.$store.dispatch("setShippingInfo", this.model)
         }
     }
 }

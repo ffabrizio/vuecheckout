@@ -1,11 +1,13 @@
 <template>
     <article>
-        <vue-form-generator 
-            :schema="schema" 
-            :model="model" 
-            :options="formOptions">
-        </vue-form-generator>
-        <button v-on:click="continueCheckout">Continue</button>
+        <form action="" @submit.prevent="continueCheckout">
+            <vue-form-generator 
+                :schema="schema" 
+                :model="model" 
+                :options="formOptions">
+            </vue-form-generator>
+            <button type="submit">Continue</button>
+        </form>
     </article>
 </template>
 
@@ -19,7 +21,7 @@ export default {
     },
     data() {
         return {
-            model: this.$store.state.checkout.steps.intro.info,
+            model: this.$store.state.checkout.intro.info,
             schema: info,
             formOptions: {
                 validateAfterLoad: true,
@@ -30,9 +32,7 @@ export default {
     },
     methods: {
         continueCheckout() {
-            //if (VueFormGenerator.isValid()) {
-                this.$store.dispatch("setPersonalInfo", this.model)
-            //}
+            this.$store.dispatch("setPersonalInfo", this.model)
         }
     }
 }
